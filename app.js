@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');//解析请求体
 
 var routes = require('./routes/index');//根路由
 var users = require('./routes/users');//用户路由
-
+var articles = require('./routes/articles');//用户路由
 var app = express();
 
 // view engine setup  设置引擎
@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));//静态文件服务
 
 app.use('/', routes);
 app.use('/users', users);
-
+app.use('/articles', articles);
 // catch 404 and forward to error handler
 //捕获404错误并且转发到错误处理中间件
 app.use(function(req, res, next) {

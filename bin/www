@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');//引用app模块
-var debug = require('debug')('201606log:server');//日志
+var app = require('../app');//function 引用app模块
+var debug = require('debug')('201606log:server');//日志主件
 var http = require('http');//创建http服务器模块
 
 /**
