@@ -14,3 +14,13 @@
 >req.parma.name  -->zfpx
 #req.body(处理post请求,获取post请求体)
 >req.body.name
+#安装bower
+>npm isntall bower -g
+#初始化bower
+>bower init
+#添加`.bowerrc`文件
+```
+{"directory":"./public/lib"}
+```
+#安装bootstrap
+>bower install bootstrap --save

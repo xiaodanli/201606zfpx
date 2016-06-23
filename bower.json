@@ -1,0 +1,24 @@
+{
+  "name": "201606log",
+  "description": "this is a blog",
+  "main": "",
+  "authors": [
+    "dandan <lixd@digi-zones.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "blog"
+  ],
+  "homepage": "https://github.com/xiaodanli/201606zfpx",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
