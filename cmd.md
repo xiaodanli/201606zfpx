@@ -24,3 +24,7 @@
 ```
 #安装bootstrap
 >bower install bootstrap --save
+#安装session会话中间件  会话绑定到数据库 
+>npm install express-session  connect-mongo --save
+#显示提示
+>npm install connect-flash --save

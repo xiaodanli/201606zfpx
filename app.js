@@ -4,10 +4,15 @@ var favicon = require('serve-favicon');//处理收藏夹图标的
 var logger = require('morgan');//处理日志
 var cookieParser = require('cookie-parser');//chuli cookie req.cookie  req.cookies
 var bodyParser = require('body-parser');//解析请求体
-
+var session = require('express-session');
+var MongoStore = require('connect-mongo/es5')(session);//会话绑到数据库
 var routes = require('./routes/index');//根路由
 var users = require('./routes/users');//用户路由
 var articles = require('./routes/articles');//用户路由
+var setting = require('./setting');
+var flash = require('connect-flash');
+require("./util");
+require("./db/index");
 var app = express();
 
 // view engine setup  设置引擎
@@ -24,7 +29,21 @@ app.use(logger('dev'));//指定日志输出的格式
 app.use(bodyParser.json());//处理json  通过Content-Type来判断是否有自己来处理
 app.use(bodyParser.urlencoded({ extended: false }));//处理form-urlencoded
 app.use(cookieParser());//处理cookie  把请求头中的cookie转成对象,加入一个cookie函数的属性
+app.use(session({
+  secret:'zfpxblog',
+  saveUninitialized:true,
+  resave:true,
+  store:new MongoStore({url:setting.dbUrl})
+}));
+app.use(flash());
+app.use(function (req,res,next) {
+  res.locals.user = req.session.user;
+  res.locals.success = req.flash('success').toString();
+  res.locals.error = req.flash('error').toString();
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));//静态文件服务
+
 
 app.use('/', routes);
 app.use('/users', users);
