@@ -28,3 +28,10 @@
 >npm install express-session  connect-mongo --save
 #显示提示
 >npm install connect-flash --save
+#安装文件上传模块
+>npm install multer --save
+#安装async
+>npm install async --save
+
+
+

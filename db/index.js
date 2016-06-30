@@ -18,8 +18,17 @@ mongoose.model('Article',new mongoose.Schema({
     title:{type:String,required:true},
     content:{type:String,required:true},
     createAt:{type:Date,default:Date.now},
-    user:{type:ObjectId,ref:'User'}//ref:主键
+    img:{type:String},
+    user:{type:ObjectId,ref:'User'},//ref:主键
+    comments:[
+        {
+            user:{type:ObjectId,ref:'User'},
+            content:{type:String},
+            createAt:{type:Date,default:Date.now}
+    }],
+    pv:{type:Number,default:0}
 }));
+
 global.Model = function (type) {
   return mongoose.model(type);
 };

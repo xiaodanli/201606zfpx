@@ -1,12 +1,10 @@
 var express = require('express');
-//返回一个路由的实例
+var markdown = require('markdown').markdown;
+//生成一个路由的实例，用来捕获访问主页的get请求
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Model('Article').find({}).populate('user').exec(function (err,articles) {
-    res.render('index', { title: '欢迎光临我的博客',articles:articles });
-  });
-
+  res.redirect('/articles/list/1/2')
 });
 module.exports = router;

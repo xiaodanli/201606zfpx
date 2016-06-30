@@ -1,7 +1,15 @@
 <%- include ./include/header.html%>
 <div class="container">
 <%
+    if(articles.nonCon){
+%>
+    <div>没有相关的内容</div>
+    <%
+    }
+    %>
+<%
     articles.forEach(function(article){
+    console.log('ss+'+article);
 %>
 <div class="media">
     <div class="media-left">
@@ -10,13 +18,107 @@
         </a>
     </div>
     <div class="media-body">
-        <h4 class="media-heading"><%= article.title %></h4>
-        <p><%= article.content%></p>
+        <h4 class="media-heading"><a href="/articles/detail/<%= article._id%>"><%= article.title %></a></h4>
+        <p><%- article.content%></p>
+    </div>
+    <div>
+        作者:<%= article.user.username %>
+        发表日期:<%= article.createAt %>
+        阅读:<%= article.pv%>
+        评论:<%= article.comments.length%>
     </div>
 </div>
 <%
     })
 %>
+    <nav>
+        <ul class="pagination">
+            <%
+                if(totalPage > 1){
+            %>
+            <li>
+                <a href="/articles/list/1/2?keyword=<%=keyword %>" aria-label="Next">
+                    <span aria-hidden="true">第一页</span>
+                </a>
+            </li>
+            <%
+            }else{
+            %>
+            <li class="disabled">
+                <a>
+                    <span aria-hidden="true">第一页</span>
+                </a>
+            </li>
+            <%
+            }
+            %>
+            <%
+            if(pageNum>1){
+            %>
+            <li>
+                <a href="/articles/list/<%= (pageNum-1)%>/2?keyword=<%=keyword %>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%
+            }else{
+            %>
+            <li class="disabled">
+                <a>
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%
+            }
+            %>
+            <%
+                for(var i=0;i < totalPage; i++){
+            %>
+                <li><a href="/articles/list/<%= (i+1)%>/2?keyword=<%=keyword %>"><%= (i+1) %></a></li>
+            <%
+                }
+            %>
+            <%
+            if(pageNum < totalPage){
+            %>
+            <li>
+                <a href="/articles/list/<%= (pageNum+1)%>/2?keyword=<%=keyword %>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <%
+            }else{
+            %>
+            <li class="disabled">
+                <a>
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            <%
+            }
+            %>
+            <%
+                if(totalPage > 1){
+            %>
+            <li>
+                <a href="/articles/list/<%= totalPage%>/2?keyword=<%=keyword %>" aria-label="Next" class="">
+                    <span aria-hidden="true">最后一页</span>
+                </a>
+            </li>
+            <%
+                }else{
+            %>
+            <li class="disabled">
+                <a>
+                    <span aria-hidden="true">最后一页</span>
+                </a>
+            </li>
+            <%
+            }
+            %>
+
+        </ul>
+    </nav>
 </div>
 <%- include ./include/footer.html%>
 
